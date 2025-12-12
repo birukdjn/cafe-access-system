@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const API_BASE_URL = 'https://localhost:7203/api';
-const DEMO_MODE = true; // Set to false when you have a real backend
+const DEMO_MODE = false; // turn off when backend is ready
 
 const apiClient = axios.create({
   baseURL: API_BASE_URL,
@@ -10,73 +10,49 @@ const apiClient = axios.create({
   },
 });
 
-// Demo data generator
+// DEMO MODE response that matches backend exactly
 const generateDemoResponse = (scannableIdCode: string) => {
-  const isGranted = Math.random() > 0.3; // 70% success rate
-  const studentNames = ['Ahmed Ali', 'Fatima Hassan', 'Omar Khalid', 'Layla Ahmed', 'Youssef Ibrahim'];
-  const randomName = studentNames[Math.floor(Math.random() * studentNames.length)];
-  
+  const isGranted = Math.random() > 0.3;
+  const names = ["Bob Johnson", "Sara Ali", "Mikel Tesfaye", "Helen Kidane"];
+
   return {
-    studentId: Math.floor(Math.random() * 1000) + 1,
-    studentName: randomName,
-    scannableIdCode: scannableIdCode,
     accessGranted: isGranted,
-    message: isGranted 
-      ? `Access granted! Welcome ${randomName}` 
-      : `Access denied - Already used today`,
-    timestamp: new Date().toISOString(),
+    message: isGranted ? "Welcome! Access granted." : "Already used today.",
+    studentName: names[Math.floor(Math.random() * names.length)],
+    studentId: Math.floor(Math.random() * 100),
+    grantedMeal: isGranted ? "Lunch" : null,
+    scanTime: new Date().toISOString(),
   };
 };
 
 export const cafeApi = {
-  // Scan a student ID - handles both 200 and 403 responses
   scan: async (scannableIdCode: string) => {
-    // Demo mode - simulate response
     if (DEMO_MODE) {
-      await new Promise(resolve => setTimeout(resolve, 500)); // Simulate network delay
+      await new Promise(r => setTimeout(r, 400));
       return generateDemoResponse(scannableIdCode);
     }
 
-    // Real API mode
     try {
       const response = await apiClient.post('/CafeAccess/scan', {
         scannableIdCode,
       });
       return response.data;
     } catch (error: any) {
-      // If it's a 403 error with data, return the error response data
-      if (error.response?.status === 403 && error.response?.data) {
-        return error.response.data;
-      }
+      if (error.response?.data) return error.response.data;
       throw error;
     }
   },
 
-  // Get all cafe access records
-  getAllAccessRecords: async () => {
-    const response = await apiClient.get('/CafeAccess');
-    return response.data;
-  },
-
-  // Get specific student access record
-  getStudentAccess: async (studentId: number) => {
-    const response = await apiClient.get(`/CafeAccess/student/${studentId}`);
-    return response.data;
-  },
-
-  // Create new cafe access record
   createAccessRecord: async (data: { studentId: number; scannableIdCode: string }) => {
     const response = await apiClient.post('/CafeAccess', data);
     return response.data;
   },
 
-  // Reset individual student access
   resetStudentAccess: async (studentId: number) => {
     const response = await apiClient.put(`/CafeAccess/reset/${studentId}`);
     return response.data;
   },
 
-  // Reset all students access
   resetAllAccess: async () => {
     const response = await apiClient.put('/CafeAccess/resetall');
     return response.data;
