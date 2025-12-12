@@ -53,7 +53,7 @@ export default function CafeAccessList() {
         <tbody>
           {records.map((record) => (
             <tr key={record.cafeAccessId} className="hover:bg-gray-50">
-              <td className="border p-2">{record.studentId}</td>
+              <td className="border p-2">{record.cafeAccessId}</td>
               <td className="border p-2">{record.studentName}</td>
               <td className="border p-2 font-mono text-sm">{record.scannableIdCode}</td>
               <td className={`border p-2 ${record.hasAccessedBreakfast ? 'text-green-600' : 'text-red-600'}`}>

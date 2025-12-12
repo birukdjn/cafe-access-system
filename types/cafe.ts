@@ -10,3 +10,15 @@ export interface CafeScanResponse {
   grantedMeal: string | null;
   scanTime: string;
 }
+
+export interface CafeAccessRecord {
+  cafeAccessId: number;
+  studentId: number;
+  studentName: string;
+  scannableIdCode: string;
+  hasAccessedBreakfast: boolean;
+  hasAccessedLunch: boolean;
+  hasAccessedDinner: boolean;
+  lastResetDate: string;
+  totalDailyAccesses: number;
+}
