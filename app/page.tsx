@@ -33,7 +33,7 @@ export default function HomePage() {
       </header>
 
       {/* Main Content - Centered */}
-      <main className="flex-1 flex items-center justify-center px-4 py-6">
+      <main className="grid grid-cols-1 md:grid-cols-2 gap- flex-1 mx-auto px-4 py-6 ">
         <ScanCard />
         <CafeAccessList />
       </main>
