@@ -1,6 +1,7 @@
 "use client";
 
 import ScanCard from "@/components/ScanCard";
+import CafeAccessList from "@/components/CafeAccessList";
 
 export default function HomePage() {
   return (
@@ -34,6 +35,7 @@ export default function HomePage() {
       {/* Main Content - Centered */}
       <main className="flex-1 flex items-center justify-center px-4 py-6">
         <ScanCard />
+        <CafeAccessList />
       </main>
     </div>
   );
