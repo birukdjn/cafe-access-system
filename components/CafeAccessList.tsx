@@ -40,12 +40,12 @@ export default function CafeAccessList() {
       <table className="min-w-full border-collapse">
         <thead>
           <tr>
-            <th className="border p-2">ID</th>
-            <th className="border p-2">Student Name</th>
-            <th className="border p-2">Scannable Code</th>
-            <th className="border p-2">Breakfast</th>
-            <th className="border p-2">Lunch</th>
-            <th className="border p-2">Dinner</th>
+            <th className="border p-1">ID</th>
+            <th className="border p-1">Student Name</th>
+            <th className="border p-1">Scannable Code</th>
+            <th className="border p-1">Breakfast</th>
+            <th className="border p-1">Lunch</th>
+            <th className="border p-1">Dinner</th>
           </tr>
         </thead>
 
