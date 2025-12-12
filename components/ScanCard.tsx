@@ -101,8 +101,8 @@ export default function ScanCard() {
             isNFCScanning
               ? "bg-red-600 animate-pulse"
               : isNFCEnabled
-              ? "bg-green-600"
-              : "bg-gray-300"
+              ? "bg-green-500"
+              : "bg-gray-400"
           }`}
         >
           {isNFCScanning ? "Stop Scanning" : "Start NFC Scan"}
